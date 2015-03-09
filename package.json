@@ -1,8 +1,7 @@
 {
-  "name": "query.es6",
+  "name": "query.js",
   "version": "0.3.0",
   "description": "",
-  "main": "query.es6",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
