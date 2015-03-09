@@ -1,14 +1,17 @@
+import PercentEncoder from "percent-encoder";
+
 export const defaultSeparator = "&";
 export const defaultEquals = "=";
+export const defaultEncoder = {
+    encode: encodeURIComponent
+};
 
-export function encode(string, separator = defaultSeparator, equals = defaultEquals) {
-    return encodeURIComponent(string).replace(/[!'()*]/g, function(chr) {
-        return "%" + chr.charCodeAt(0).toString(16);
-    });
+export function encode(string, encoder = defaultEncoder) {
+    return encoder.encode(string);
 }
 
-export function decode(string, separator = defaultSeparator, equals = defaultEquals) {
-    return decodeURIComponent(string);
+export function decode(string) {
+    return PercentEncoder.decode(string);
 }
 
 export function stringify(object, separator = defaultSeparator, equals = defaultEquals) {
