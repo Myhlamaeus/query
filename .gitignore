@@ -26,3 +26,8 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+# `grunt test` errors
+errors.txt
+
+dist
