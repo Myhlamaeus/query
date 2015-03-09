@@ -1,36 +1,30 @@
-const encode = function(str) {
-        return encodeURIComponent(str).replace(/[!'()*]/g, function(chr) {
-            return "%" + chr.charCodeAt(0).toString(16);
-        });
-    },
-    decode = decodeURIComponent,
-    query = {
-        "defaultSeperator": "&",
-        "defaultEquals": "=",
-        "stringify": function(object, separator = query.defaultSeparator, equals = query.defaultEquals) {
-            Object.keys(object).map(function(key) {
-                return query.encode(key) + equals + query.encode(object[key]);
-            });
-        },
-        "parse": function(string, separator = query.defaultSeparator, equals = query.defaultEquals) {
-            const ret = {};
+export const defaultSeparator = "&";
+export const defaultEquals = "=";
 
-            string.split(new RegExp(separator, "g")).forEach((pair) => {
-                var [key, val] = pair.split(equals);
+export function encode(string, separator = defaultSeparator, equals = defaultEquals) {
+    return encodeURIComponent(string).replace(/[!'()*]/g, function(chr) {
+        return "%" + chr.charCodeAt(0).toString(16);
+    });
+}
 
-                ret[this.decode(key)] = this.decode(val);
-            });
+export function decode(string, separator = defaultSeparator, equals = defaultEquals) {
+    return decodeURIComponent(string);
+}
 
-            return ret;
-        },
-        "encode": function(string, separator = query.defaultSeparator, equals = query.defaultEquals) {
-            return encode(string);
-        },
-        "decode": function(string, separator = query.defaultSeparator, equals = query.defaultEquals) {
-            return decode(string);
-        }
-    };
+export function stringify(object, separator = defaultSeparator, equals = defaultEquals) {
+    Object.keys(object).map(function(key) {
+        return encode(key) + equals + encode(object[key]);
+    });
+}
 
-Object.freeze(query);
+export function parse(string, separator = defaultSeparator, equals = defaultEquals) {
+    const ret = {};
 
-export default query;
+    string.split(new RegExp(separator, "g")).forEach((pair) => {
+        var [key, val] = pair.split(equals);
+
+        ret[decode(key)] = decode(val);
+    });
+
+    return ret;
+}
