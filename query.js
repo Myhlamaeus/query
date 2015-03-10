@@ -24,9 +24,9 @@ export function parse(string, separator = defaultSeparator, equals = defaultEqua
     const ret = {};
 
     string.split(new RegExp(separator, "g")).forEach((pair) => {
-        const [key, val] = pair.split(equals);
+        const [key, ...val] = pair.split(equals);
 
-        ret[decode(key)] = decode(val);
+        ret[decode(key)] = decode(val.join(equals));
     });
 
     return ret;
