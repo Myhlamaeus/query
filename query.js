@@ -14,9 +14,9 @@ export function decode(string) {
     return PercentEncoder.decode(string);
 }
 
-export function stringify(object, separator = defaultSeparator, equals = defaultEquals) {
+export function stringify(object, equals = defaultEquals, encoder = defaultEncoder) {
     Object.keys(object).map(function(key) {
-        return encode(key) + equals + encode(object[key]);
+        return encode(key, encoder) + equals + encode(object[key], encoder);
     });
 }
 
