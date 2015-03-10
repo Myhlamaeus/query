@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/not-naught/query",
   "license": "GPL-3.0",
-  "main": "query.js",
+  "main": "dist/cjs.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/not-naught/query.git"
